@@ -1,4 +1,4 @@
-// DEMONSTRATION promotional configuration. Edit here to change campaigns.
+// Campaign configuration. Enable scheduled offers only after confirming real availability.
 import heroFashion from "@/assets/hero-fashion.jpg";
 import heroBeauty from "@/assets/hero-beauty.jpg";
 import heroHome from "@/assets/hero-home.jpg";
@@ -6,7 +6,7 @@ import promoFashion from "@/assets/promo-fashion.jpg";
 import promoBaby from "@/assets/promo-baby.jpg";
 import promoCare from "@/assets/promo-care.jpg";
 import promoKitchen from "@/assets/promo-kitchen.jpg";
-import summerVeg from "@/assets/summer-vegetable.jpg";
+import seasonalStyle from "@/assets/seasonal-style.jpg";
 
 export interface Promo {
   id: string;
@@ -33,18 +33,25 @@ export const promoBanners: Promo[] = [
   { id: "b4", title: "Kitchen Upgrades", description: "Appliances & cookware", offer: "From ৳390", cta: "Shop Now", href: "/category/home-kitchen", image: promoKitchen, enabled: true },
 ];
 
-export const summerVegetable: Promo & { startsAt: string; endsAt: string } = {
-  id: "summer-veg",
-  title: "SUMMER VEGETABLE",
-  description: "Farm-fresh greens and seasonal vegetables, delivered to your door.",
-  offer: "Save up to 5% OFF",
-  cta: "Shop Now",
-  href: "/category/home-kitchen",
-  image: summerVeg,
-  enabled: true,
-  startsAt: "2026-01-01T00:00:00+06:00",
-  endsAt: "2027-03-31T23:59:59+06:00",
+export interface ScheduledPromo extends Promo { startsAt: string; endsAt: string }
+
+export const seasonalOffer: ScheduledPromo = {
+  id: "seasonal-style",
+  eyebrow: "Special Seasonal Offer",
+  title: "EVERYDAY STYLE",
+  description: "Discover More, Love More",
+  offer: "Save up to 20% OFF",
+  cta: "SHOP NOW",
+  href: "/collection/seasonal",
+  image: seasonalStyle,
+  enabled: false,
+  startsAt: "",
+  endsAt: "",
 };
+
+export const popupConfig = { sessionKey: "sholok:offer-popup", delayMs: 1800, maxPerSession: 1 } as const;
+export const shouldShowOfferPopup = (promo: ScheduledPromo, seenThisSession: boolean, now = Date.now()) =>
+  isPromoActive(promo, now) && !seenThisSession;
 
 export const flashSaleConfig = {
   enabled: true,

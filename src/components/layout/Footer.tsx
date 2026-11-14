@@ -4,7 +4,7 @@ import { contactInfo } from "@/data/promotions";
 
 export function Footer() {
   return (
-    <footer className="mt-16 bg-primary-deep text-primary-foreground">
+    <footer className="mt-16 bg-sale text-sale-foreground">
       <div className="container-shop grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="font-display text-3xl">SHOLOK</p>
@@ -38,7 +38,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-primary-foreground/15 py-4 text-center text-xs text-primary-foreground/60">
-        © {new Date().getFullYear()} SHOLOK Shopping · Demonstration storefront — products and prices are sample data.
+        © {new Date().getFullYear()} SHOLOK Shopping · All rights reserved.
       </div>
     </footer>
   );

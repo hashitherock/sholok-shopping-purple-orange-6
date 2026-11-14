@@ -6,6 +6,7 @@ import { CategoryList } from "./CategoryList";
 import { Link } from "@tanstack/react-router";
 import { categories } from "@/data/categories";
 import { cn } from "@/lib/utils";
+import { CategoryIcon } from "@/components/common/CategoryIcon";
 
 function HeroSlider() {
   const slides = heroSlides.filter((s) => s.enabled);
@@ -78,7 +79,7 @@ export function HeroSection() {
           {categories.map((c) => (
             <li key={c.slug}>
               <Link to="/category/$slug" params={{ slug: c.slug }} className="flex flex-col items-center gap-1.5 rounded-xl p-2 text-center text-[11px] font-semibold leading-tight hover:bg-primary-soft">
-                <span className="grid size-11 place-items-center rounded-xl bg-primary-soft text-primary"><c.icon className="size-5" strokeWidth={1.8} aria-hidden /></span>
+                <span className="grid size-12 place-items-center rounded-full bg-primary-soft text-primary"><CategoryIcon slug={c.slug} className="size-8" /></span>
                 {c.name}
               </Link>
             </li>

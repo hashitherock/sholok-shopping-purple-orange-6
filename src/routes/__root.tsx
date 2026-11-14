@@ -9,6 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { MainNavigation } from "@/components/layout/MainNavigation";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { FloatingCart } from "@/components/cart/FloatingCart";
 import { ProductQuickView } from "@/components/product/ProductQuickView";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -88,6 +89,7 @@ function RootComponent() {
         <main id="main" className="min-h-[50vh]"><Outlet /></main>
         <Footer />
         <CartDrawer />
+        <FloatingCart />
         <ProductQuickView />
         <Toaster position="top-center" richColors />
       </ShopProvider>
