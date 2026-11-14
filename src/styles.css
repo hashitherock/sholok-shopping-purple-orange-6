@@ -1,6 +1,6 @@
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -36,6 +36,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-sale: var(--sale);
+  --color-sale-deep: var(--sale-deep);
   --color-sale-foreground: var(--sale-foreground);
   --color-fresh: var(--fresh);
   --color-fresh-soft: var(--fresh-soft);
@@ -62,10 +63,11 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --shadow-card: var(--shadow-card-v);
   --shadow-lift: var(--shadow-lift-v);
+  --shadow-floating: var(--shadow-floating-v);
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
   --cat-w: 272px;
   --background: oklch(0.981 0.004 308); /* #F8F7FA */
   --surface: oklch(1 0 0);
@@ -74,7 +76,7 @@
   --card-foreground: oklch(0.245 0.013 300);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.245 0.013 300);
-  --primary: oklch(0.39 0.2 307); /* #5D0096 */
+  --primary: #5D0096;
   --primary-deep: oklch(0.31 0.16 307);
   --primary-soft: oklch(0.95 0.022 315); /* #F3EAF8 */
   --primary-foreground: oklch(1 0 0);
@@ -84,7 +86,10 @@
   --muted-foreground: oklch(0.56 0.017 300); /* #77717F */
   --accent: oklch(0.95 0.022 315);
   --accent-foreground: oklch(0.39 0.2 307);
-  --sale: oklch(0.55 0.21 29); /* #D31710 */
+  --sale: #D31710;
+  --sale-deep: color-mix(in oklab, var(--sale) 82%, var(--foreground));
+  --seasonal-surface: oklch(0.965 0.017 15);
+  --shadow-floating-v: 0 8px 28px color-mix(in oklab, var(--sale) 30%, transparent), 0 2px 8px color-mix(in oklab, var(--foreground) 14%, transparent);
   --sale-foreground: oklch(1 0 0);
   --fresh: oklch(0.52 0.13 145);
   --fresh-soft: oklch(0.94 0.05 135);
@@ -124,6 +129,7 @@
     font-family: var(--font-sans);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: 0;
   }
   :focus-visible {
     outline: 2px solid var(--color-ring);
@@ -138,6 +144,12 @@
       scroll-behavior: auto !important;
     }
   }
+}
+
+.seasonal-panel { background: var(--seasonal-surface); }
+.seasonal-shade { background: linear-gradient(90deg, var(--seasonal-surface) 0%, color-mix(in oklab, var(--seasonal-surface) 94%, transparent) 24%, transparent 60%); }
+@media (max-width: 639px) {
+  .seasonal-shade { background: linear-gradient(90deg, var(--seasonal-surface) 0%, color-mix(in oklab, var(--seasonal-surface) 94%, transparent) 35%, color-mix(in oklab, var(--seasonal-surface) 35%, transparent) 100%); }
 }
 
 @utility container-shop {

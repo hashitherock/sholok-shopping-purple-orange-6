@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { mainNav, type NavItem } from "@/data/navigation";
 import { CategoryList } from "@/components/home/CategoryList";
 import { Logo } from "@/components/common/Logo";
+import { Button } from "@/components/ui/button";
 
 const navLinkCls = "rounded-md px-3 py-2 text-sm font-bold text-primary-foreground/85 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground";
 const activeCls = "bg-primary-foreground/15 text-primary-foreground";
@@ -34,25 +35,25 @@ export function MainNavigation() {
   }, [catOpen]);
 
   return (
-    <nav aria-label="Main" className="sticky top-0 z-40 bg-primary shadow-card">
-      <div className="container-shop flex h-12 items-center gap-4">
-        <button type="button" onClick={() => setMobileOpen(true)} className="flex items-center gap-2 rounded-md px-2 py-2 text-sm font-bold text-primary-foreground lg:hidden" aria-label="Open menu">
+    <nav aria-label="Main" className="sticky top-0 z-40 bg-sale shadow-card">
+      <div className="container-shop flex min-h-12 items-center gap-2">
+        <Button variant="sale" type="button" onClick={() => setMobileOpen(true)} className="flex items-center gap-2 px-2 py-2 text-sm font-bold xl:hidden" aria-label="Open menu">
           <Menu className="size-5" aria-hidden /> Menu
-        </button>
+        </Button>
 
-        <div ref={wrapRef} className="relative hidden h-full lg:block" onMouseLeave={() => !isHome && setCatOpen(false)}>
-          <button
+        <div ref={wrapRef} className="relative hidden h-12 xl:block" onMouseLeave={() => !isHome && setCatOpen(false)}>
+          <Button
             type="button"
             aria-expanded={isHome || catOpen}
             aria-controls="cat-panel"
             onClick={() => !isHome && setCatOpen((o) => !o)}
             onMouseEnter={() => !isHome && setCatOpen(true)}
-            className="w-cat flex h-full items-center gap-3 bg-primary-deep px-4 text-sm font-extrabold uppercase tracking-wide text-primary-foreground"
+            className="w-cat flex h-full items-center gap-3 rounded-none bg-sale-deep px-4 text-sm font-extrabold text-sale-foreground hover:bg-sale-deep"
           >
             <LayoutGrid className="size-4" aria-hidden />
             <span className="flex-1 text-left">Shop by Category</span>
             <ChevronDown className={`size-4 transition-transform ${catOpen ? "rotate-180" : ""}`} aria-hidden />
-          </button>
+          </Button>
           {!isHome && (
             <div
               id="cat-panel"
@@ -63,14 +64,11 @@ export function MainNavigation() {
           )}
         </div>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden min-w-0 flex-1 items-center justify-between xl:flex [&_a]:px-2 [&_a]:text-xs 2xl:[&_a]:text-sm">
           {mainNav.map((item) => (
             <li key={item.label}><NavLink item={item} className={navLinkCls} /></li>
           ))}
         </ul>
-        <Link to="/collection/$type" params={{ type: "flash-sale" }} className="ml-auto hidden rounded-full bg-sale px-3 py-1 text-xs font-extrabold text-sale-foreground xl:inline-block">
-          Flash Deals Live
-        </Link>
       </div>
 
       <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>

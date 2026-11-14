@@ -3,8 +3,11 @@ import { toast } from "sonner";
 import type { CartLine, Product } from "@/types/product";
 import { getProduct } from "@/data/products";
 import { deliveryLocations } from "@/data/navigation";
+import type { OrderDraft } from "@/utils/checkout";
 
 interface ShopState {
+  orderDrafts: OrderDraft[];
+  saveOrderDraft: (draft: OrderDraft) => void;
   cart: CartLine[];
   wishlist: string[];
   compare: string[];
@@ -49,9 +52,11 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [quickView, setQuickView] = useState<Product | null>(null);
+  const [orderDrafts, setOrderDrafts] = useState<OrderDraft[]>([]);
 
-  // Load persisted demo state after hydration (cart/wishlist: localStorage; search + seed: session only).
+  // Restore browser shopping state after hydration.
   useEffect(() => {
+    setOrderDrafts(readJSON(localStorage, "sholok:order-drafts", []));
     setCart(readJSON(localStorage, "sholok:cart", []));
     setWishlist(readJSON(localStorage, "sholok:wishlist", []));
     setLocationState(readJSON<string>(localStorage, "sholok:location", deliveryLocations[0] ?? "Dhaka"));
@@ -68,6 +73,7 @@ export function ShopProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => { if (hydrated) localStorage.setItem("sholok:cart", JSON.stringify(cart)); }, [cart, hydrated]);
   useEffect(() => { if (hydrated) localStorage.setItem("sholok:wishlist", JSON.stringify(wishlist)); }, [wishlist, hydrated]);
+  useEffect(() => { if (hydrated) localStorage.setItem("sholok:order-drafts", JSON.stringify(orderDrafts)); }, [orderDrafts, hydrated]);
   useEffect(() => { if (hydrated) sessionStorage.setItem("sholok:compare", JSON.stringify(compare)); }, [compare, hydrated]);
   useEffect(() => { if (hydrated) sessionStorage.setItem("sholok:searches", JSON.stringify(searchHistory)); }, [searchHistory, hydrated]);
 
@@ -136,11 +142,12 @@ export function ShopProvider({ children }: { children: ReactNode }) {
   const value = useMemo<ShopState>(
     () => ({
       cart, wishlist, compare, searchHistory, location, sessionSeed, hydrated, cartOpen, quickView,
+      orderDrafts, saveOrderDraft: (draft) => setOrderDrafts((previous) => [draft, ...previous]),
       setCartOpen, setQuickView, addToCart, updateQty, removeFromCart,
       clearCart: () => setCart([]),
       toggleWishlist, toggleCompare, clearCompare: () => setCompare([]), recordSearch, setLocation,
     }),
-    [cart, wishlist, compare, searchHistory, location, sessionSeed, hydrated, cartOpen, quickView, addToCart, updateQty, removeFromCart, toggleWishlist, toggleCompare, recordSearch, setLocation],
+    [cart, wishlist, compare, searchHistory, location, sessionSeed, hydrated, cartOpen, quickView, orderDrafts, addToCart, updateQty, removeFromCart, toggleWishlist, toggleCompare, recordSearch, setLocation],
   );
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;

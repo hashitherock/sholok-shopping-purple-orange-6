@@ -8,6 +8,8 @@ export const Route = createFileRoute("/search")({
   validateSearch: (s: Record<string, unknown>) => ({ q: typeof s["q"] === "string" ? s["q"] : "" }),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Search — SHOLOK Shopping" },
       { name: "description", content: "Search SHOLOK products by name, category or brand." },
       { property: "og:title", content: "Search — SHOLOK Shopping" },

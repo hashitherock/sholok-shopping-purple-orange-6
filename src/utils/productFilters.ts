@@ -72,6 +72,11 @@ export function getCollection(key: CollectionKey): Product[] {
     case "trending": return sortProducts(products, "popular").filter((p) => p.stock > 0).slice(0, 12);
     case "new-arrivals": return sortProducts(products, "newest").slice(0, 12);
     case "best-sellers": return sortProducts(products, "popular");
+    case "discover": return sortProducts(products, "newest");
+    case "offers": return filterProducts(products, { onSaleOnly: true });
+    case "bundles": return products.filter((p) => /set|\+|with four/i.test(p.name + " " + p.description));
+    case "festivals": return products.filter((p) => ["womens-clothing", "mens-clothing", "fashion-lifestyle", "beauty-makeup"].includes(p.category));
+    case "seasonal": return products.filter((p) => ["womens-clothing", "fashion-lifestyle"].includes(p.category));
     default: return products;
   }
 }

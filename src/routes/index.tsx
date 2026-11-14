@@ -3,11 +3,14 @@ import { homeSections, type HomeSectionKey } from "@/data/homeSections";
 import { HeroSection } from "@/components/home/HeroSection";
 import { PromotionalBanners } from "@/components/home/PromotionalBanners";
 import { FlashSale } from "@/components/home/FlashSale";
-import { TrendingItems, SummerVegetableBanner, MoreToLove } from "@/components/home/ProductSections";
+import { TrendingItems, MoreToLove } from "@/components/home/ProductSections";
+import { SeasonalOfferBanner, SeasonalOfferPopup } from "@/components/home/SeasonalOffer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "SHOLOK Shopping — Fashion, Beauty, Home & More" },
       { name: "description", content: "Shop women's & men's clothing, beauty, personal care, home & kitchen and more with flash deals at SHOLOK." },
       { property: "og:title", content: "SHOLOK Shopping — Fashion, Beauty, Home & More" },
@@ -22,7 +25,7 @@ const sectionMap: Record<HomeSectionKey, () => React.JSX.Element | null> = {
   promoBanners: PromotionalBanners,
   flashSale: FlashSale,
   trending: TrendingItems,
-  summerVegetable: SummerVegetableBanner,
+  seasonalOffer: SeasonalOfferBanner,
   moreToLove: MoreToLove,
 };
 
@@ -30,6 +33,7 @@ function Index() {
   return (
     <>
       <h1 className="sr-only">SHOLOK Shopping</h1>
+      <SeasonalOfferPopup />
       {homeSections.map((k) => { const S = sectionMap[k]; return <S key={k} />; })}
     </>
   );
