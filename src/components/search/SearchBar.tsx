@@ -5,6 +5,8 @@ import { useShop } from "@/context/ShopProvider";
 import { searchProducts } from "@/utils/productFilters";
 import { categories } from "@/data/categories";
 import { formatBDT } from "@/utils/currency";
+import { CategoryIcon } from "@/components/common/CategoryIcon";
+import { Button } from "@/components/ui/button";
 
 export function SearchBar() {
   const [q, setQ] = useState("");
@@ -63,10 +65,10 @@ export function SearchBar() {
           }}
           className="min-w-0 flex-1 bg-transparent px-4 text-sm outline-none placeholder:text-muted-foreground"
         />
-        <button type="submit" className="flex items-center gap-2 bg-primary px-4 text-sm font-bold text-primary-foreground hover:bg-primary-deep" aria-label="Search">
+        <Button variant="sale" type="submit" className="h-full rounded-none px-4 text-sm font-bold" aria-label="Search">
           <Search className="size-4" aria-hidden />
           <span className="hidden sm:inline">Search</span>
-        </button>
+        </Button>
       </div>
 
       {open && (q.trim() || searchHistory.length > 0) && (
@@ -87,7 +89,7 @@ export function SearchBar() {
             <div className="border-b border-border p-2">
               {catMatches.map((c) => (
                 <button key={c.slug} type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => { recordSearch(c.name); setOpen(false); navigate({ to: "/category/$slug", params: { slug: c.slug } }); }} className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-sm hover:bg-primary-soft">
-                  <c.icon className="size-4 text-primary" aria-hidden /> <span>in <b>{c.name}</b></span>
+                  <CategoryIcon slug={c.slug} className="size-6 text-primary" /> <span>in <b>{c.name}</b></span>
                 </button>
               ))}
             </div>

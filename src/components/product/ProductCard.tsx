@@ -6,6 +6,7 @@ import { useCart, useCompare, useWishlist } from "@/hooks/useShop";
 import { useShop } from "@/context/ShopProvider";
 import { Rating } from "./Rating";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const iconBtn =
   "grid size-9 place-items-center rounded-full border border-border bg-surface text-foreground shadow-card transition-colors hover:border-primary hover:bg-primary hover:text-primary-foreground";
@@ -74,7 +75,7 @@ function ProductCardBase({ product, showStock = false }: { product: Product; sho
         <Rating value={product.rating} reviews={product.reviews} />
         <div className="mt-auto flex flex-wrap items-baseline gap-x-2 pt-1">
           <span className="text-base font-extrabold text-primary">{formatBDT(product.price)}</span>
-          {off > 0 && <span className="text-xs text-muted-foreground line-through">{formatBDT(product.regularPrice!)}</span>}
+          {off > 0 && product.regularPrice !== undefined && <span className="text-xs text-muted-foreground line-through">{formatBDT(product.regularPrice)}</span>}
         </div>
         {showStock && !out && (
           <div className="space-y-1">
@@ -86,15 +87,15 @@ function ProductCardBase({ product, showStock = false }: { product: Product; sho
             </p>
           </div>
         )}
-        <button
+        <Button variant="sale"
           type="button"
           disabled={out}
           onClick={() => add(product)}
-          className="mt-2 inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-primary bg-primary-soft text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground disabled:cursor-not-allowed disabled:border-border disabled:bg-muted disabled:text-muted-foreground"
+          className="mt-2 h-10 w-full px-2 text-sm font-bold disabled:bg-muted disabled:text-muted-foreground"
         >
           <ShoppingCart className="size-4" aria-hidden />
           {out ? "Sold Out" : "Add to Cart"}
-        </button>
+        </Button>
       </div>
     </article>
   );
