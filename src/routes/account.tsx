@@ -6,7 +6,9 @@ import { formatBDT } from "@/utils/currency";
 
 export const Route = createFileRoute("/account")({
   head: () => ({ meta: [
-    { title: "My Account — SHOLOK Shopping" },
+    { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "My Account — SHOLOK Shopping" },
     { name: "description", content: "Your SHOLOK account overview." },
     { property: "og:title", content: "My Account — SHOLOK" },
     { property: "og:description", content: "Account overview." },

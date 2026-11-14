@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/become-seller")({
   head: () => ({ meta: [
-    { title: "Become a Seller — SHOLOK Shopping" },
+    { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Become a Seller — SHOLOK Shopping" },
     { name: "description", content: "Sell your products to customers across Bangladesh on SHOLOK." },
     { property: "og:title", content: "Become a Seller — SHOLOK" },
     { property: "og:description", content: "Grow your business with SHOLOK." },

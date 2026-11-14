@@ -10,12 +10,16 @@ export const Route = createFileRoute("/collection/$type")({
     return {
       meta: c
         ? [
-            { title: `${c.title} — SHOLOK Shopping` },
+            { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: `${c.title} — SHOLOK Shopping` },
             { name: "description", content: c.description },
             { property: "og:title", content: `${c.title} — SHOLOK Shopping` },
             { property: "og:description", content: c.description },
           ]
-        : [{ title: "Not found — SHOLOK" }, { name: "robots", content: "noindex" }],
+        : [{ property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Not found — SHOLOK" }, { name: "robots", content: "noindex" }],
     };
   },
   component: CollectionPage,

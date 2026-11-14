@@ -6,7 +6,9 @@ import { getCategory } from "@/data/categories";
 
 export const Route = createFileRoute("/compare")({
   head: () => ({ meta: [
-    { title: "Compare Products — SHOLOK Shopping" },
+    { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Compare Products — SHOLOK Shopping" },
     { name: "description", content: "Compare products side by side at SHOLOK." },
     { property: "og:title", content: "Compare Products — SHOLOK" },
     { property: "og:description", content: "Side-by-side product comparison." },

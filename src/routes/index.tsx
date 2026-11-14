@@ -9,6 +9,8 @@ import { SeasonalOfferBanner, SeasonalOfferPopup } from "@/components/home/Seaso
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "SHOLOK Shopping — Fashion, Beauty, Home & More" },
       { name: "description", content: "Shop women's & men's clothing, beauty, personal care, home & kitchen and more with flash deals at SHOLOK." },
       { property: "og:title", content: "SHOLOK Shopping — Fashion, Beauty, Home & More" },

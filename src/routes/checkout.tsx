@@ -11,7 +11,9 @@ import { formatBDT } from "@/utils/currency";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({ meta: [
-    { title: "Checkout — SHOLOK Shopping" },
+    { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Checkout — SHOLOK Shopping" },
     { name: "description", content: "Review your shopping bag and save your SHOLOK order details." },
     { property: "og:title", content: "Checkout — SHOLOK" },
     { property: "og:description", content: "Review your SHOLOK shopping bag and delivery details." },

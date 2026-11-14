@@ -4,7 +4,9 @@ import { ProductGrid } from "@/components/product/ProductGrid";
 
 export const Route = createFileRoute("/wishlist")({
   head: () => ({ meta: [
-    { title: "My Wishlist — SHOLOK Shopping" },
+    { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "My Wishlist — SHOLOK Shopping" },
     { name: "description", content: "Products you saved for later at SHOLOK." },
     { property: "og:title", content: "My Wishlist — SHOLOK" },
     { property: "og:description", content: "Your saved SHOLOK products." },

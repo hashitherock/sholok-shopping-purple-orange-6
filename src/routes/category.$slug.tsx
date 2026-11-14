@@ -8,12 +8,16 @@ export const Route = createFileRoute("/category/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.name} — SHOLOK Shopping` },
+          { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: `${loaderData.name} — SHOLOK Shopping` },
           { name: "description", content: `Shop ${loaderData.name} at SHOLOK with great prices and fast delivery.` },
           { property: "og:title", content: `${loaderData.name} — SHOLOK Shopping` },
           { property: "og:description", content: `Shop ${loaderData.name} at SHOLOK.` },
         ]
-      : [{ title: "Category not found — SHOLOK" }, { name: "robots", content: "noindex" }],
+      : [{ property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Category not found — SHOLOK" }, { name: "robots", content: "noindex" }],
   }),
   component: CategoryPage,
 });
